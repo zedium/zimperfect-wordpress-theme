@@ -38,10 +38,11 @@ get_header();
 		endif;
 		?>
 	<!-- Pagination -->
-		<ul class="actions pagination">
-			<li><a href="" class="disabled button large previous">Previous Page</a></li>
-			<li><a href="#" class="button large next">Next Page</a></li>
-		</ul>
+		
+		<div class="posts pagination">
+			<?php posts_nav_link() ?>
+			
+		</div>
 
 </div>
 <?php get_sidebar(); ?>

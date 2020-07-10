@@ -1,7 +1,13 @@
 <?php
 
 require_once 'inc/theme-options.php';
+require_once 'inc/aboutwidget.php';
 
+add_action('widget_init', 'zfunc_register_widgets');
+
+function zfunc_register_widgets(){
+  register_widget('AboutWidget');
+}
 
 add_theme_support( 'post-thumbnails' ); 
 
@@ -22,3 +28,11 @@ function enq_scripts(){
 }
 
 add_action('wp_enqueue_scripts', 'enq_scripts');
+
+
+add_filter('next_posts_link_attributes', 'posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+
+function posts_link_attributes() {
+  return 'class="button large next"';
+}
