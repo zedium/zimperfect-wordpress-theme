@@ -2,6 +2,8 @@
 
 require_once 'inc/theme-options.php';
 require_once 'inc/aboutwidget.php';
+include_once 'inc/register-sidebar.php';
+
 
 add_action('widget_init', 'zfunc_register_widgets');
 
