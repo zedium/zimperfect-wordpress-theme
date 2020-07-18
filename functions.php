@@ -2,6 +2,7 @@
 
 require_once 'inc/theme-options.php';
 require_once 'inc/aboutwidget.php';
+require_once 'inc/latestpostswidget.php';
 include_once 'inc/register-sidebar.php';
 
 
