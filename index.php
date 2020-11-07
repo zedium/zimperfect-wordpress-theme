@@ -13,7 +13,7 @@ get_header();
 			<header>
 				<div class="title">
 					<h2><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h2>
-					<p>Post Description</p>
+					<p><?php echo get_post_meta(get_the_ID(), 'Description', true); ?></p>
 				</div>
 				<div class="meta">
 					<time class="published" datetime="2015-11-01"><?php the_date() ?></time>
@@ -21,7 +21,7 @@ get_header();
 				</div>
 			</header>
 			<a href="<?php the_permalink(); ?>" class="image featured"><?php the_post_thumbnail('full') ?></a>
-			<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+			<p><?php the_excerpt(); ?></p>
 			<footer>
 				<ul class="actions">
 					<li><a href="<?php the_permalink(); ?>" class="button large">Continue Reading</a></li>

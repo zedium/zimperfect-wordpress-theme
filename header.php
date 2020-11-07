@@ -2,13 +2,14 @@
 global $zimperfect;
 ?><!DOCTYPE HTML>
 <!--
-	Future Imperfect by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+	Future Imperfect WP by Zedium
+	github.com/zedium
+	Free for personal and commercial use under the CCA 3.0 license (GPL V3.0)
 -->
 <html>
 	<head>
-		<title>Future Imperfect by HTML5 UP</title>
+		<?php $main_title = get_bloginfo('title'); ?>
+		<title><?php echo empty($main_title)? 'Future Imperfect WP': $main_title ?></title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<?php 
@@ -41,9 +42,9 @@ global $zimperfect;
 						<nav class="main">
 							<ul>
 								<li class="search">
-									<a class="fa-search" href="#search">Search</a>
-									<form id="search" method="get" action="#">
-										<input type="text" name="query" placeholder="Search" />
+									<a id="main-search-icon" class="fa-search" href="#search">Search</a>
+									<form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+										<input type="text" name="s" placeholder="Search" /><br />
 									</form>
 								</li>
 								<li class="menu">
@@ -58,7 +59,7 @@ global $zimperfect;
 
 						<!-- Search -->
 							<section>
-								<form class="search" method="get" action="#">
+								<form role="search"  id="search" class="search" method="get" action="action="<?php echo esc_url( home_url( '/' ) ); ?>">
 									<input type="text" name="query" placeholder="Search" />
 								</form>
 							</section>
