@@ -28,8 +28,8 @@ global $zimperfect;
 
 				<!-- Header -->
 					<header id="header">
-						<h1><a href="/"><?php echo $zimperfect['zopt-site-title'] ?></a></h1>
-						<?php wp_nav_menu( array( 'theme_location' => 'main-menu' ) ); ?>
+						<h1><a href="/"><?php echo !empty($zimperfect['zopt-site-title'])?$zimperfect['zopt-site-title'] : get_bloginfo('title');  ?></a></h1>
+						<?php wp_nav_menu( array( 'theme_location' => 'main-menu',  'container'=>'nav', 'container_class'=>'links') ); ?>
 						<!--<nav class="links">
 							<ul>
 								<li><a href="#">Lorem</a></li>

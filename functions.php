@@ -39,3 +39,12 @@ add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 function posts_link_attributes() {
   return 'class="button large next"';
 }
+
+
+
+add_action('after_setup_theme', 'zimperfect_add_thumbnail_size');
+function zimperfect_add_thumbnail_size(){
+  add_image_size('main_post_thumbnails', 754, 306, true);
+  add_image_size('sidebar_post_thumbnail', 350, 175, true);
+  add_image_size('sidebar_post_micro_thumbnail', 64, 64, true);
+}

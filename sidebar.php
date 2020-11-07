@@ -21,7 +21,7 @@ global $zimperfect;
             
             $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
             foreach($recent_posts as $recent_post){
-                //var_dump($recent_post);
+                echo 'hi';
             ?>
             <!-- Mini Post -->
                 <article class="mini-post">
@@ -30,7 +30,7 @@ global $zimperfect;
                         <time class="published" datetime="<?php the_date() ?>"><?php echo $recent_post['post_date'] ?></time>
                         <a href="#" class="author"><img src="<?php echo get_avatar_url( get_the_author_meta('user_email', $recent_post['post_author']) ) ?>" alt="" /></a>
                     </header>
-                    <a href="<?php the_permalink( $recent_post['ID'] ) ?>" class="image"><?php echo get_the_post_thumbnail($recent_post['ID'], $size = array(350, 175)) ?></a>
+                    <a href="<?php the_permalink( $recent_post['ID'] ) ?>" class="image"><?php echo get_the_post_thumbnail($recent_post['ID'], $size = 'sidebar_post_thumbnail') ?></a>
                 </article>
 
             <?php }

@@ -20,7 +20,7 @@ get_header();
 					<a href="#" class="author"><span class="name"><?php the_author(); ?></span><img src="<?php echo get_avatar_url(  get_the_author_meta('user_email') ) ?>" alt="" /></a>
 				</div>
 			</header>
-			<a href="<?php the_permalink(); ?>" class="image featured"><?php the_post_thumbnail('full') ?></a>
+			<a href="<?php the_permalink(); ?>" class="image featured"><?php the_post_thumbnail('main_post_thumbnails') ?></a>
 			<p><?php the_excerpt(); ?></p>
 			<footer>
 				<ul class="actions">
