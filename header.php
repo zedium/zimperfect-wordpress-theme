@@ -43,7 +43,7 @@ global $zimperfect;
 							<ul>
 								<li class="search">
 									<a id="main-search-icon" class="fa-search" href="#search">Search</a>
-									<form role="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<form role="search" id="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
 										<input type="text" name="s" placeholder="Search" /><br />
 									</form>
 								</li>
@@ -59,14 +59,15 @@ global $zimperfect;
 
 						<!-- Search -->
 							<section>
-								<form role="search"  id="search" class="search" method="get" action="action="<?php echo esc_url( home_url( '/' ) ); ?>">
-									<input type="text" name="query" placeholder="Search" />
+								<form role="search"  id="search" class="search" method="get" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+									<input type="text" name="s" placeholder="Search" />
 								</form>
 							</section>
 
 						<!-- Links -->
 							<section>
-								<ul class="links">
+							<?php wp_nav_menu( array( 'theme_location' => 'sliding-menu',   'menu_class'=>'links') ); ?>
+								<!--<ul class="links">
 									<li>
 										<a href="#">
 											<h3>Lorem ipsum</h3>
@@ -91,7 +92,7 @@ global $zimperfect;
 											<p>Porta lectus amet ultricies</p>
 										</a>
 									</li>
-								</ul>
+								</ul>-->
 							</section>
 
 						<!-- Actions -->

@@ -6,7 +6,7 @@ global $zimperfect;
 
 <!-- Intro -->
     <section id="intro">
-        <a href="#" class="logo"><img src="<?php echo $zimperfect['zopt-logo']['url']; ?>" alt="" /></a>
+        <a href="/" class="logo"><img src="<?php echo $zimperfect['zopt-logo']['url']; ?>" alt="" /></a>
         <header>
             <h2><?php echo (!empty($zimperfect) && !empty($zimperfect['zopt-site-title'])) ? $zimperfect['zopt-site-title'] : bloginfo( 'title' )  ?></h2>
             <p><?php echo (!empty($zimperfect) && !empty($zimperfect['zopt-site-description'])) ? $zimperfect['zopt-site-description'] : bloginfo( 'description' )  ?></p>
@@ -21,7 +21,7 @@ global $zimperfect;
             
             $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
             foreach($recent_posts as $recent_post){
-                echo 'hi';
+                
             ?>
             <!-- Mini Post -->
                 <article class="mini-post">
@@ -75,13 +75,24 @@ global $zimperfect;
     </section>-->
 
 <!-- Footer -->
+
     <section id="footer">
         <ul class="icons">
-            <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-            <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-            <li><a href="#" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
-            <li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            <?php if (!empty($zimperfect) && !empty($zimperfect['zopt-social-twitter'])){  ?>
+            <li><a href="<?php echo $zimperfect['zopt-social-twitter'] ?>" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+            <?php } ?>
+            <?php if (!empty($zimperfect) && !empty($zimperfect['zopt-social-facebook'])){  ?>
+            <li><a href="<?php echo $zimperfect['zopt-social-facebook'] ?>" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+            <?php } ?>
+            <?php if (!empty($zimperfect) && !empty($zimperfect['zopt-social-instagram'])){  ?>
+            <li><a href="<?php echo $zimperfect['zopt-social-instagram'] ?>" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+            <?php } ?>
+            <?php if (!empty($zimperfect) && !empty($zimperfect['zopt-social-rss'])){  ?>
+            <li><a href="<?php echo $zimperfect['zopt-social-rss'] ?>" class="icon solid fa-rss"><span class="label">RSS</span></a></li>
+            <?php } ?>
+            <?php if (!empty($zimperfect) && !empty($zimperfect['zopt-social-email'])){  ?>
+            <li><a href="<?php echo $zimperfect['zopt-social-email'] ?>" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
+            <?php } ?>
         </ul>
         <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
     </section>
