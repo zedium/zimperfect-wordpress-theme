@@ -56,6 +56,16 @@ Redux::setSection( $opt_name,
                 'hint'     => array(
                                 'content' => 'Description',
                             )
+            ),
+            array(
+                'id'       => 'zopt-site-footer-text',
+                'type'     => 'text',
+                'title'    => esc_html__( 'Website Footer Text', 'zimperfect-theme-textdomain' ),
+                'desc'     => esc_html__( 'This text will be shown in footer section', 'zimperfect-theme-textdomain' ),
+                'subtitle' => esc_html__( 'Website footer text', 'zimperfect-theme-textdomain' ),
+                'hint'     => array(
+                                'content' => 'Footer text',
+                            )
             )
         )
     )

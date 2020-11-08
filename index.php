@@ -13,7 +13,7 @@ get_header();
 			<header>
 				<div class="title">
 					<h2><a href="<?php the_permalink(); ?>"><?php the_title() ?></a></h2>
-					<p><?php echo get_post_meta(get_the_ID(), 'Description', true); ?></p>
+					<p><?php echo get_post_meta(get_the_ID(), 'post-description-meta-box-text', true); ?></p>
 				</div>
 				<div class="meta">
 					<time class="published" datetime="2015-11-01"><?php the_date() ?></time>

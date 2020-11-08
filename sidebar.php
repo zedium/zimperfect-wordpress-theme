@@ -15,53 +15,8 @@ global $zimperfect;
     </section>
 
 <!-- Mini Posts -->
-    <section>
-        <div class="mini-posts">
-            <?php 
-            
-            $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
-            foreach($recent_posts as $recent_post){
-                
-            ?>
-            <!-- Mini Post -->
-                <article class="mini-post">
-                    <header>
-                        <h3><a href="<?php echo get_permalink( $recent_post['ID'] );?>"><?php echo $recent_post['post_title'] ?></a></h3>
-                        <time class="published" datetime="<?php the_date() ?>"><?php echo $recent_post['post_date'] ?></time>
-                        <a href="#" class="author"><img src="<?php echo get_avatar_url( get_the_author_meta('user_email', $recent_post['post_author']) ) ?>" alt="" /></a>
-                    </header>
-                    <a href="<?php the_permalink( $recent_post['ID'] ) ?>" class="image"><?php echo get_the_post_thumbnail($recent_post['ID'], $size = 'sidebar_post_thumbnail') ?></a>
-                </article>
+    
 
-            <?php }
-            wp_reset_query(); 
-            ?>
-
-        </div>
-    </section>
-
-<!-- Posts List -->
-    <section>
-        <ul class="posts">
-            <?php
-            $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
-            foreach($recent_posts as $recent_post){
-            ?>
-            <li>
-                <article>
-                    <header>
-                        <h3><a href="<?php echo get_permalink( $recent_post['ID'] );?>"><?php echo $recent_post['post_title'] ?></a></h3>
-                        <time class="published" datetime="<?php echo $recent_post['post_date'] ?>"><?php echo $recent_post['post_date'] ?></time>
-                    </header>
-                    <a href="<?php echo get_permalink( $recent_post['ID'] );?>" class="image"><?php echo get_the_post_thumbnail($recent_post['ID'], $size = array(51, 51)) ?></a>
-                </article>
-            </li>
-            <?php
-            }
-            wp_reset_query(); 
-            ?>
-        </ul>
-    </section>
     <?php
     dynamic_sidebar('zim-about-sidebar');
     ?>
@@ -94,7 +49,8 @@ global $zimperfect;
             <li><a href="<?php echo $zimperfect['zopt-social-email'] ?>" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
             <?php } ?>
         </ul>
-        <p class="copyright">&copy; Untitled. Design: <a href="http://html5up.net">HTML5 UP</a>. Images: <a href="http://unsplash.com">Unsplash</a>.</p>
+        <?php echo $zimperfect['zopt-site-footer-text'] ?>
+        
     </section>
 
 </section>

@@ -1,6 +1,6 @@
 <?php
 
-class LatestPostsWidget extends WP_Widget{
+class PostsFromCategoryWidget extends WP_Widget{
     
     public $args = array(
         'before_title'  => '<h4>',
@@ -11,10 +11,12 @@ class LatestPostsWidget extends WP_Widget{
 
     public function __construct()
     {
-        parent::__construct('latestposts-widget', 'Imperfect Latest Posts');
+        parent::__construct('posts-in-categories-widget', 'Imperfect Posts From Category');
         add_action( 'widgets_init', function() {
-            register_widget( 'LatestPostsWidget' );
+            register_widget( 'PostsFromCategoryWidget' );
         });
+
+
     }
     public function widget($args, $instance){
         echo $args['before_widget'];
@@ -22,6 +24,7 @@ class LatestPostsWidget extends WP_Widget{
         if ( ! empty( $instance['title'] ) ) {
             echo $args['before_title'] . apply_filters( 'widget_title', $instance['title'] ) . $args['after_title'];
         }
+        $recent_posts = wp_get_recent_posts( array('numberposts'=>$instance['postcount'], 'category'=>$instance['category']) );
         ?>
         <div class="postcountwidget">
         <?php if( $instance['display_type'] == 'regular' ){ ?>
@@ -29,7 +32,7 @@ class LatestPostsWidget extends WP_Widget{
             <div class="mini-posts">
                 <?php 
                 
-                $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
+                
                 foreach($recent_posts as $recent_post){
                     
                 ?>
@@ -54,7 +57,7 @@ class LatestPostsWidget extends WP_Widget{
             <section>
                 <ul class="posts">
                     <?php
-                    $recent_posts = wp_get_recent_posts( array('numberposts'=>4) );
+                    
                     foreach($recent_posts as $recent_post){
                     ?>
                     <li>
@@ -72,15 +75,15 @@ class LatestPostsWidget extends WP_Widget{
                     ?>
                 </ul>
             </section>
-        <?php } ?>
-        </div>
-        <?php
+        <?php } 
+
         echo $args['after_widget'];
     }
     public function form($instance){
         $title = ! empty( $instance['title'] ) ? $instance['title'] : esc_html__( '', 'zimperfect-theme-textdomain' );
         $postcount = ! empty( $instance['postcount'] ) ? $instance['postcount'] : esc_html__( '', 'zimperfect-theme-textdomain' );
         $display_type = ! empty( $instance['display_type'] ) ? $instance['display_type'] : esc_html__( '', 'zimperfect-theme-textdomain' );
+        $category = ! empty( $instance['category'] ) ? $instance['category'] : esc_html__( '', 'zimperfect-theme-textdomain' );
         ?>
         <p>
         <label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php echo esc_html__( 'Title:', 'zimperfect-theme-textdomain' ); ?></label>
@@ -97,6 +100,17 @@ class LatestPostsWidget extends WP_Widget{
                 <option value='regular' <?php echo ($display_type == 'regular') ? 'selected="selected"' : ''; ?>>Regular</option>
             </select>
         </p>
+        <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>"><?php echo esc_html__( 'Category:', 'zimperfect-theme-textdomain' ); ?></label>
+            <select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'category' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'category' ) ); ?>" type="text">
+                <?php 
+                $categories = $this->getCategories();
+                foreach($categories as $category_id=>$category_name){ ?>
+                <option value='<?php echo $category_id ?>' <?php echo ($category_id == $category) ? 'selected="selected"' : ''; ?>><?php echo $category_name ?></option>
+                <?php } ?>
+                
+            </select>
+        </p>
         <?php
     }
     public function update($new_instance, $old_instance){
@@ -105,9 +119,26 @@ class LatestPostsWidget extends WP_Widget{
         $instance['title'] = ( !empty( $new_instance['title'] ) ) ? strip_tags( $new_instance['title'] ) : '';
         $instance['postcount'] = ( !empty( $new_instance['postcount'] ) ) ? $new_instance['postcount'] : '';
         $instance['display_type'] = ( !empty( $new_instance['display_type'] ) ) ? $new_instance['display_type'] : '';
+        $instance['category'] = ( !empty( $new_instance['category'] ) ) ? $new_instance['category'] : '';
  
         return $instance;
     }
+
+
+    public function getCategories(){
+        $raw_categories = get_categories( array(
+            'orderby' => 'name',
+            'order'   => 'ASC'
+          ) );
+        
+        $categories = array();
+
+        foreach($raw_categories as $category){
+            $categories[$category->cat_ID] = $category->name;
+        }
+
+        return $categories;
+    }
 }
 
-$aboutWidget = new LatestPostsWidget();
+$postsFromCategoryWidget = new PostsFromCategoryWidget();

@@ -1,8 +1,10 @@
 <?php
 
+
 require_once 'inc/theme-options.php';
 require_once 'inc/aboutwidget.php';
 require_once 'inc/latestpostswidget.php';
+require_once 'inc/posts-in-categories.php';
 include_once 'inc/register-sidebar.php';
 
 
@@ -44,7 +46,7 @@ function posts_link_attributes() {
 
 add_action('after_setup_theme', 'zimperfect_add_thumbnail_size');
 function zimperfect_add_thumbnail_size(){
-  add_image_size('main_post_thumbnails', 754, 306, true);
+  add_image_size('main_post_thumbnails', 840, 341, true);
   add_image_size('sidebar_post_thumbnail', 350, 175, true);
   add_image_size('sidebar_post_micro_thumbnail', 64, 64, true);
 }
@@ -62,4 +64,49 @@ function change_nav_menu_item_title($title, $item, $args, $depth){
 
   return $title;
 
+}
+
+function post_description_meta_box_markup($object)
+{
+  //var_dump($object);
+  wp_nonce_field(basename(__FILE__), "post-description-meta-box-nonce");
+  ?>
+  <div>
+    <label for="post-description-metabox">Post Description</label>
+    <textarea id="post-description-metabox" name="post-description-metabox" class="components-text-control__input" rows=3><?php echo get_post_meta($object->ID, "post-description-meta-box-text", true); ?></textarea>
+  </div>
+  <?php
+}
+
+function add_post_description_meta_box()
+{
+    add_meta_box("post-description-metabox", "Post Description", "post_description_meta_box_markup", "post", "side", "high", null);
+}
+
+add_action("add_meta_boxes", "add_post_description_meta_box");
+
+
+add_action("save_post", "save_post_description_meta_box", 10, 3);
+
+function save_post_description_meta_box($post_id, $post, $update){
+  if (!isset($_POST["post-description-meta-box-nonce"]) || !wp_verify_nonce($_POST["post-description-meta-box-nonce"], basename(__FILE__)))
+    return $post_id;
+
+  if(!current_user_can("edit_post", $post_id))
+    return $post_id;
+
+  if(defined("DOING_AUTOSAVE") && DOING_AUTOSAVE)
+    return $post_id;
+
+  $slug = "post";
+  if($slug != $post->post_type)
+    return $post_id;
+
+
+  $post_description_meta_data = '';
+  if(isset($_POST["post-description-metabox"]))
+  {
+      $post_description_meta_data = $_POST["post-description-metabox"];
+  }
+  update_post_meta($post_id, "post-description-meta-box-text", $post_description_meta_data);  
 }
