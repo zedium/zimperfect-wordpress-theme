@@ -98,7 +98,7 @@ global $zimperfect;
 						<!-- Actions -->
 							<section>
 								<ul class="actions stacked">
-									<li><a href="#" class="button large fit">Log In</a></li>
+									<li><a href="<?php echo  (is_user_logged_in())? wp_logout_url(home_url( '/' )) : wp_login_url(home_url( '/' )); ?>" class="button large fit"><?php echo  (is_user_logged_in())? 'Logout' : 'Login' ?></a></li>
 								</ul>
 							</section>
 

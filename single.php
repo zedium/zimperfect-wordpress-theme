@@ -32,7 +32,7 @@ get_header();
 			</footer>
 		</article>
 		<?php 
-        if ( comments_open() || get_comments_number() ) {
+         if ( comments_open() || get_comments_number() ) {
             comments_template();
         }
         endwhile;
@@ -42,5 +42,6 @@ get_header();
 
 </div>
 <?php get_sidebar(); ?>
+<?php get_footer(); ?>
 
 

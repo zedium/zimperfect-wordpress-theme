@@ -110,3 +110,90 @@ function save_post_description_meta_box($post_id, $post, $update){
   }
   update_post_meta($post_id, "post-description-meta-box-text", $post_description_meta_data);  
 }
+
+
+
+add_action( 'rest_api_init', function () {
+  register_rest_route( 'zimperfect/v1', '/like/(?P<id>\d+)', array(
+    'methods' => 'GET',
+    'callback' => 'zimperfect_update_likes',
+    'permission_callback' => '__return_true'
+  ) );
+
+  register_rest_route( 'zimperfect/v1', '/likes/(?P<id>\d+)', array(
+    'methods' => 'GET',
+    'callback' => 'zimperfect_get_likes',
+    'permission_callback' => '__return_true'
+  ) );
+
+} );
+
+
+
+
+/*
+* Callbalc for REST request to update likes
+*/
+
+
+
+function zimperfect_update_likes( $data ) {
+  
+  $postID = $data['id'];
+  
+
+  
+
+  $ip = $_SERVER['REMOTE_ADDR'];
+  $key = 'postlike-' . $ip;
+  
+  $meta = get_post_meta($postID, $key, true);
+  
+  if(empty($meta)){
+    
+    //return "doesn exists $postID $key"  ;
+    add_post_meta($postID, $key, "1", true);
+       
+  }
+
+  $postLikes = getPostLikes($postID);
+  return array('response'=>'OK', 'data'=>$postLikes);
+  
+}
+
+
+
+/*
+* Callbalc for REST request to get likes
+*/
+function zimperfect_get_likes($data){
+  $postID = $data['id'];
+
+  return getPostLikes($postID);
+}
+
+
+
+
+
+/*
+* 
+* get_post_meta does group in meta keys that similiar
+* for example when the meta key is postlike-172.18.0.1 if it was repeated twice, function will return one 
+* key with value of array contains two 1 e.g postlike-172.18.0.1 => array(1,1)
+* Due to this we use count($value) for counting likes.
+*/
+
+
+function getPostLikes($postID){
+  $metas = get_post_meta($postID);
+  //return $metas;
+  $likesCount = 0;
+  foreach($metas as $meta => $value){
+    
+    if(strstr($meta, 'postlike-')){
+      $likesCount += count($value);
+    }
+  }
+  return $likesCount;
+}

@@ -28,7 +28,7 @@ get_header();
 				</ul>
 				<ul class="stats">
 					<li><a href="#">General</a></li>
-					<li><a href="#" class="icon solid fa-heart">28</a></li>
+					<li><a href="javascript:void(0)" class="likebutton icon solid fa-heart" data-postid="<?php the_ID(); ?>"><?php echo getPostLikes(get_the_ID()); ?></a></li>
 					<li><a href="#" class="icon solid fa-comment"><?php echo get_comments_number( )?></a></li>
 				</ul>
 			</footer>
