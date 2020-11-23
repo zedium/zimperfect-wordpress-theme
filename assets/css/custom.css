@@ -2,3 +2,12 @@ div.pagination{
     font-size: 0.7em;
     padding: 0 3em;
 }
+.comment-body{
+    padding: 1.5em;
+    background-color: #f5f5f5;
+    margin: 1.1em;
+}
+
+.comment-body .fn{
+    font-weight: bold;
+}

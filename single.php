@@ -21,13 +21,13 @@ get_header();
 				</div>
 			</header>
 			<a href="<?php the_permalink(); ?>" class="image featured"><?php the_post_thumbnail('full') ?></a>
-			<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sed tellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+			<p><?php the_content(); ?></p>
 			<footer>
 				
 				<ul class="stats">
 					<li><a href="#">General</a></li>
-					<li><a href="#" class="icon solid fa-heart">28</a></li>
-					<li><a href="#" class="icon solid fa-comment"><?php echo get_comments_number( )?></a></li>
+					<li><a href="javascript:void(0)" class="likebutton icon solid fa-heart" data-postid="<?php the_ID(); ?>"><?php echo getPostLikes(get_the_ID()); ?></a></li>
+					<li><a href="#comments" class="icon solid fa-comment"><?php echo get_comments_number( )?></a></li>
 				</ul>
 			</footer>
 		</article>
