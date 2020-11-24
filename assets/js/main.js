@@ -37,7 +37,7 @@
 				hideOnSwipe: true,
 				resetScroll: true,
 				resetForms: true,
-				side: 'right',
+				side: 'left',
 				target: $body,
 				visibleClass: 'is-menu-visible'
 			});

@@ -6,7 +6,7 @@ global $zimperfect;
 	github.com/zedium
 	Free for personal and commercial use under the CCA 3.0 license (GPL V3.0)
 -->
-<html>
+<html dir="rtl">
 	<head>
 		<?php $main_title = get_bloginfo('title'); ?>
 		<title><?php echo empty($main_title)? 'Future Imperfect WP': $main_title ?></title>
@@ -14,9 +14,10 @@ global $zimperfect;
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<?php 
 		wp_enqueue_style('main-style', get_template_directory_uri(). '/assets/css/main.css'); 
+
 		wp_enqueue_style('main-menu-style', get_template_directory_uri(). '/assets/css/mainmenu.css');
 		wp_enqueue_style('custom', get_template_directory_uri(). '/assets/css/custom.css');
-		
+		wp_enqueue_style('rtl-style', get_template_directory_uri(). '/assets/css/rtl.css');
 		
 		
 		?>
